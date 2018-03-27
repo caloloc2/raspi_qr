@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Raspberry Lector QR</title>
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="icon" href="favicon.ico">
+</head>
+<body>
+	
+	<form id="login" onsubmit="Login(); return false;">
+		<figure><img src="img/logo.png" alt=""></figure>	
+		<input type="text" id="usuario" placeholder="Su nombre de usuario" required="true">		
+		<input type="password" id="clave" placeholder="Su contrase&ntilde;a" required="true">
+		<input type="submit" value="Ingresar">
+	</form>
+
+	<div id="mensaje">
+		<p>Sus credenciales son incorrectas!</p>
+	</div>
+	
+	<script src="js/jquery.min.js"></script>
+	<script src="js/main.js"></script>
+
+	<script>
+		function Login(){
+			var usuario = document.getElementById('usuario').value;
+			var clave = document.getElementById('clave').value;
+
+			$.ajax({
+				url: 'php/test.php',
+				dataType: 'json',
+				data:{
+					usuario: usuario,
+					clave, clave
+				},
+				type: 'POST',
+				success: function(datos) {
+					if (datos['estado']){
+						window.location.href = "principal.php";
+					}else{
+						Mensaje('Sus credenciales sin incorrectas!', 3500);
+						document.getElementById('usuario').value = '';
+						document.getElementById('clave').value = '';
+					}
+				},
+				error:function(e){
+					console.log(e.responseText);
+				}
+			});
+		}
+	</script>
+</body>
+</html>
