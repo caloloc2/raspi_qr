@@ -5,6 +5,10 @@ try{
 	$fp = fopen("lugares.txt", "w");
 	fputs($fp, "0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0");
 	fclose($fp);
+
+	$fp = fopen("raspi.txt", "w");
+	fputs($fp, "0");
+	fclose($fp);
 	
 	$respuesta['estado'] = true;
 }catch(Exception $e){

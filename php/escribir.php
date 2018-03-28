@@ -24,19 +24,22 @@ try{
 		"TIOCETONA", "---", "---", "---", "---", "---", "---", "---", "---", "AMONIACO"
 	);
 	$pi = 0;
+	$aux = 1;
 	for ($x=0; $x<30; $x++){
 		if ($productos[$x]==$codigo){
 			$respuesta['producto'] = $codigo;
 			if ($linea[$x]=='0'){
 				$nueva_linea .= '1';
 				$respuesta['mov'] = 1;
+				$pi = $x+$aux;
 			}else{
 				$nueva_linea .= '0';
 				$respuesta['mov'] = 2;
+				$pi = $x+$aux+1;
 			}
-			$pi=$x;
 		}else{
 			$nueva_linea .= $linea[$x];
+			$aux+=1;
 		}
 
 		if ($x<30){
@@ -48,6 +51,7 @@ try{
 	fputs($fp, $nueva_linea);
 	fclose($fp);
 
+	$respuesta['pi'] = $pi;
 	$fp = fopen("raspi.txt", "w");
 	fputs($fp, $pi);
 	fclose($fp);
