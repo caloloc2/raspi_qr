@@ -72,3 +72,5 @@ def lectura():
 while(1):
 	lectura()
 	time.sleep(1)
+
+	#GPIO.cleanup() ## Hago una limpieza de los GPIO

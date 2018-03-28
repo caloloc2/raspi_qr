@@ -23,7 +23,7 @@ try{
 		"---", "---", "---", "---", "---", "---", "---", "---", "---", "---",
 		"TIOCETONA", "---", "---", "---", "---", "---", "---", "---", "---", "AMONIACO"
 	);
-
+	$pi = 0;
 	for ($x=0; $x<30; $x++){
 		if ($productos[$x]==$codigo){
 			$respuesta['producto'] = $codigo;
@@ -34,6 +34,7 @@ try{
 				$nueva_linea .= '0';
 				$respuesta['mov'] = 2;
 			}
+			$pi=$x;
 		}else{
 			$nueva_linea .= $linea[$x];
 		}
@@ -45,6 +46,10 @@ try{
 
 	$fp = fopen("lugares.txt", "w");
 	fputs($fp, $nueva_linea);
+	fclose($fp);
+
+	$fp = fopen("raspi.txt", "w");
+	fputs($fp, $pi);
 	fclose($fp);
 
 	$respuesta['datos'] = $nueva_linea;
