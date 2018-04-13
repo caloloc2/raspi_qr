@@ -75,7 +75,11 @@
 
 	<script>
 		$(document).ready(function(){
-			Encerar();
+			var OpSys = checkOS();
+			console.log(OpSys);
+			if (OpSys=="Linux"){
+				Encerar();	
+			}
 		})
 	</script>
 </body>
