@@ -1,4 +1,6 @@
 <?php
+// Encera los valores de las posiciones y los pines mediante los archivos de texto q seran leidos por la raspberry.
+
 $respuesta['estado'] = false; 
 
 try{

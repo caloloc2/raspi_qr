@@ -47,10 +47,12 @@ try{
 		}
 	}
 
+	// guarda en el archivo de texto la posicion del codigo si corresponde.
 	$fp = fopen("lugares.txt", "w");
 	fputs($fp, $nueva_linea);
 	fclose($fp);
 
+	// guarda el numero de la posicion en el archivo de texto.
 	$respuesta['pi'] = $pi;
 	$fp = fopen("raspi.txt", "w");
 	fputs($fp, $pi);

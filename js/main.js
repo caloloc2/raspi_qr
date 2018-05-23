@@ -1,4 +1,5 @@
 function checkOS() {
+	// comprueba el tipo de navegador 
 	if(navigator.userAgent.indexOf('IRIX') != -1)
 	{ var OpSys = "Irix"; }
 	else if((navigator.userAgent.indexOf('Win') != -1) &&
@@ -29,10 +30,11 @@ function checkOS() {
 }
 
 function Mensaje(mensaje, tiempo){
+	// Muestra el mensaje en la interfaz
 	$('#mensaje > p').html(mensaje);
 	$('#mensaje').fadeIn(150);
 
-	if (tiempo!=0){
+	if (tiempo!=0){ // luego de un tiempo se desaparece automaticamente el mensaje
 		setInterval(function(){
 			$('#mensaje').fadeOut(450);
 		}, tiempo)	
@@ -40,20 +42,22 @@ function Mensaje(mensaje, tiempo){
 }
 
 function Leer(){
+	// Ejecuta el archivo leer.php que se encarga de leer las posiciones en "bodega"
 	$.ajax({
 		url: 'php/leer.php',
 		dataType: 'json',		
 		success: function(datos) {			
-			Cuadros(datos);
+			Cuadros(datos); // Llama a la funcion Cuadros
 		},
 		error:function(e){
-			console.log(e.responseText);
+			console.log(e.responseText); // muestra el error si lo hay
 		}
 	});
 }
 
 function Escribir(codigo){
-	console.log(codigo);
+	// Ejecuta el archivo escribir.php que se encarga de recibir el codigo leido y comparar con los existentes 
+	// para determinar si existe o no, y en que posicion se encuentra
 	$.ajax({
 		url: 'php/escribir.php',
 		dataType: 'json',
@@ -61,37 +65,40 @@ function Escribir(codigo){
 			codigo: codigo
 		},
 		type: 'POST',
-		success: function(datos) {			
-			console.log(datos);
-			Cuadros(datos);			
+		success: function(datos) {						
+			Cuadros(datos); // Llama a la funcion Cuadros
 		},
 		error:function(e){
-			console.log(e.responseText);
+			console.log(e.responseText); // muestra el error si lo hay
 		}
 	});	
 }
 
 function Encerar(){
+	// Ejecuta el archivo encerar.php que se encarga de apagar los pines de la raspberry y encerar todos los valores.
 	$.ajax({
 		url: 'php/encerar.php',
 		dataType: 'json',		
 		success: function(datos) {			
-			console.log(datos);			
+			console.log(datos);	
 		},
 		error:function(e){
-			console.log(e.responseText);
+			console.log(e.responseText); // muestra el error si lo hay
 		}
 	});	
 }
 
 
 function Cuadros(data){
+	// Funcion que muestra el mensaje correspondiente y posiciona 
+	// segun el codigo QR leido
+
 	var mensaje = '';
 	var status = '';
 	$('.estatus').removeClass('almacena');
 	$('.estatus').removeClass('despacha');
 
-
+	// muestra mensaje
 	if (data['mov']==1){
 		mensaje = "Almacenando producto "+data['producto']+"... ";
 		status = 'almacena';
@@ -109,7 +116,7 @@ function Cuadros(data){
 		$('.cuadros li').removeClass('on');
 		pos.forEach(function(item, index){
 			if (item!=0){
-				$('.cuadros li:nth('+index+')').addClass('on');
+				$('.cuadros li:nth('+index+')').addClass('on'); // pinta el cuadro si corresponde
 			}
 		})
 	}, 5000)
