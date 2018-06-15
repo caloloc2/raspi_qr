@@ -19,9 +19,9 @@ try{
 	$respuesta['producto'] = '';
 
 	$productos = array(
-		"BROMO", "---", "RADON", "---", "---", "---", "---", "---", "---", "FRANCIO",
-		"---", "---", "---", "---", "---", "---", "---", "---", "---", "---",
-		"TIOCETONA", "---", "---", "---", "---", "---", "---", "---", "---", "AMONIACO"
+		"BROMO", "TIOCETONA", "AZUFRE", "ARSENICO", "PLUTONIO", "CROMO", "ALQUITRAN", "RADON", "CADMIO", "FRANCIO",
+		"METANO", "TOLUENO", "BERILIO", "BENCENO", "AMIANTO", "POLONIO", "AMONIACO", "NAFTALINA", "ACROLEINA", "MERCURIO",
+		"FORMALDEHIDO", "ANTIMONIO", "PLOMO", "FLUOR", "RICINA", "MAGNESIO", "CLORO", "VX", "URANIO", "BOTULINA"
 	);
 	$pi = 0;
 	$aux = 1;
@@ -30,11 +30,11 @@ try{
 			$respuesta['producto'] = $codigo;
 			if ($linea[$x]=='0'){
 				$nueva_linea .= '1';
-				$respuesta['mov'] = 1;
+				$respuesta['mov'] = 1; ### ALMACENA
 				$pi = $x+$aux;
 			}else{
 				$nueva_linea .= '0';
-				$respuesta['mov'] = 2;
+				$respuesta['mov'] = 2; ### DESPACHA
 				$pi = $x+$aux+1;
 			}
 		}else{
